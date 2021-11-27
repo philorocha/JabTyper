@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/w3.css">
+    <title>JabTyper</title>
+</head>
+<body>
+    <div class="w3-container w3-light-blue w3-center">
+        <h1>JabTyper</h1>
+    </div>
+    
+    <div class="w3-row w3-content">
+        <input type="text" id="nome" class="w3-input w3-margin-top" placeholder="Nome do Jogador">
+    </div>
+
+    <div class="w3-row w3-content">
+        <button class="w3-btn w3-green w3-mobile w3-margin-top w3-round-medium">Adicionar</button>
+    </div>
+
+    <div class="w3-row w3-content">
+        <!--<h2 class="w3-center">Tempo</h2>-->
+        <h2 id="tempo" class="w3-center">15</h2>
+    </div>
+
+    <!--<ul class="informacoes">
+        <li><span id="tamanho-frase"></span> palavras</li>
+        <li><span id="tempo">15</span> segundos</li>
+    </ul>-->
+
+    <div class="w3-row w3-content w3-center">
+        <textarea id="campo-digitacao" class="w3-mobile w3-panel w3-border w3-round" cols="60" rows="10"></textarea>
+    </div>
+
+    <div class="w3-row w3-content w3-center">
+        <button id="botao-reiniciar" class="w3-btn w3-blue w3-mobile">Reset</button>
+    </div>
+    
+    <ul>
+        <li><span id="caracteres-digitados">0</span> caracteres digitados</li>
+        <li><span id="palavras-digitadas">0</span> palavras digitadas</li>
+    </ul>
+    <br>
+    <h2>Placar</h2>
+    <table id="tabela-resultado" border="1">
+        <thead>
+            <th>Usuário</th>
+            <th>Nº de Palavras</th>
+        </thead>
+    </table>
+    <script src="js/jquery.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
