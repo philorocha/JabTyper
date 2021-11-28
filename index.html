@@ -5,51 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
     <title>JabTyper</title>
 </head>
 <body>
-    <div class="w3-container w3-light-blue w3-center">
+    <div id="header"class="w3-container w3-red w3-center">
+        <i class="snes-logo"></i>
         <h1>JabTyper</h1>
     </div>
     
     <div class="w3-row w3-content">
-        <input type="text" id="nome" class="w3-input w3-margin-top" placeholder="Nome do Jogador">
+        <input type="text" id="nome" class="nes-input w3-margin-top" placeholder="Nome do Jogador">
     </div>
 
     <div class="w3-row w3-content">
-        <button class="w3-btn w3-green w3-mobile w3-margin-top w3-round-medium">Adicionar</button>
-    </div>
-
-    <div class="w3-row w3-content">
-        <!--<h2 class="w3-center">Tempo</h2>-->
-        <h2 id="tempo" class="w3-center">15</h2>
-    </div>
-
-    <!--<ul class="informacoes">
-        <li><span id="tamanho-frase"></span> palavras</li>
-        <li><span id="tempo">15</span> segundos</li>
-    </ul>-->
-
-    <div class="w3-row w3-content w3-center">
-        <textarea id="campo-digitacao" class="w3-mobile w3-panel w3-border w3-round" cols="60" rows="10"></textarea>
+        <h3 id="tempo" class="w3-center w3-margin-top">15</h3>
     </div>
 
     <div class="w3-row w3-content w3-center">
-        <button id="botao-reiniciar" class="w3-btn w3-blue w3-mobile">Reset</button>
+        <textarea id="campo-digitacao" class="w3-mobile nes-textarea w3-col s12 m12 l12" cols="60" rows="5"></textarea>
+    </div>
+
+    <div class="w3-row w3-content w3-center">
+        <button id="botao-reiniciar" class="nes-btn is-primary w3-mobile w3-margin-top">Reset</button>
+    </div>
+
+    <div class="w3-row w3-content w3-center w3-margin-top">
+        <ul class="nes-list w3-mobile">
+            <li><span id="caracteres-digitados">0</span> caracteres digitados</li>
+            <li><span id="palavras-digitadas">0</span> palavras digitadas</li>
+        </ul>
+    </div>
+
+    <div class="w3-row w3-content w3-center">
+        <h4 class="w3-margin-top w3-mobile">Placar</h4>
     </div>
     
-    <ul>
-        <li><span id="caracteres-digitados">0</span> caracteres digitados</li>
-        <li><span id="palavras-digitadas">0</span> palavras digitadas</li>
-    </ul>
-    <br>
-    <h2>Placar</h2>
-    <table id="tabela-resultado" border="1">
-        <thead>
-            <th>Usuário</th>
-            <th>Nº de Palavras</th>
-        </thead>
-    </table>
+    <div class="w3-row w3-content w3-center">
+        <table id="tabela-resultado" class="w3-table nes-table is-bordered is-centered">
+            <thead>
+                <th>Usuário</th>
+                <th>Nº de Palavras</th>
+            </thead>
+        </table>
+    </div>
+
     <script src="js/jquery.js"></script>
     <script src="js/main.js"></script>
 </body>

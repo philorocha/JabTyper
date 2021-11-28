@@ -3,24 +3,25 @@ var numPalavras = frase.split(" ").length;
 
 var tempoJogo = $("#tempo");
 var tempoInicial = tempoJogo.text();
-
-/*var tamanhoFrase = $("#tamanho-frase");
-tamanhoFrase.text(numPalavras);*/
-
-//contando caracteres
 var campo = $("#campo-digitacao");
+var nome = $("#nome");
 
 campo.on("input", function() {
     var frase = campo.val();
     var nCaracteresDigitados = frase.length;
     $("#caracteres-digitados").text(nCaracteresDigitados);
-
     $("#palavras-digitadas").text(frase.split(" ").length);
 });
 
 var cronometro;
 
 campo.on("focus", function() {
+    //Impedir que jogo inicie sem o jogador informar o nome
+    if (nome.val().length == 0) {
+        alert("Digite o nome do jogador!");
+        $("#nome").focus();
+        return;
+    }
     cronometro = setInterval(function() {
         var tempoRestante = tempoJogo.text();
         if (tempoRestante <= 0) {

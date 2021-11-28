@@ -1,0 +1,17 @@
+*, h1, h2, h3, h4 {
+    font-family: 'Press Start 2P', cursive;
+}
+
+h1, h4 {
+    display: inline;
+}
+
+body {
+    background-image: url("../img/gaming-pattern.png");
+    background-repeat: repeat;
+    min-height: 768px;
+}
+
+#header {
+    background-color: #e76e55;
+}
