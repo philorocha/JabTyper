@@ -30,7 +30,7 @@ campo.on("focus", function() {
             var nome = $("#nome").val();
             var palavrasDigitadas = $("#palavras-digitadas").text();
             var pontuacao = palavrasDigitadas/tempoInicial * 60;
-            $("#tabela-resultado").append("<tr><td>"+nome+"</td><td>"+pontuacao+"</td></tr>");
+            $("#tabela-resultado").append("<tr><td class='w3-center'>"+nome+"</td><td class='w3-center'>"+pontuacao+"</td></tr>");
         } else {
             tempoRestante--;
             tempoJogo.text(tempoRestante);
@@ -42,9 +42,11 @@ $("#botao-reiniciar").on("click", function() {
     clearInterval(cronometro);
     campo.attr("disabled", false);
     campo.val("");
+    nome.val("");
     $("#caracteres-digitados").text("0");
     $("#palavras-digitadas").text("0");
     $("#tempo").text(tempoInicial)
+    nome.focus();
 })
 
 /*
