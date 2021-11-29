@@ -1,4 +1,4 @@
-var frase = $(".frase").text();
+/*var frase = $(".frase").text();
 var numPalavras = frase.split(" ").length;
 
 var tempoJogo = $("#tempo");
@@ -47,11 +47,16 @@ $("#botao-reiniciar").on("click", function() {
     $("#palavras-digitadas").text("0");
     $("#tempo").text(tempoInicial)
     nome.focus();
-})
+})*/
 
 /*
-JS puro
+JS puro*/
 var campo = document.getElementById("campo-digitacao");
+var tempoJogo = document.getElementById("tempo");
+var tempoInicial = tempoJogo.innerText;
+var reiniciarBtn = document.getElementById("botao-reiniciar");
+var cronometro;
+
 campo.addEventListener("input", function(event) {
     let frase = campo.value;
     let nCaracteresDigitados = frase.length;
@@ -61,15 +66,48 @@ campo.addEventListener("input", function(event) {
     document.getElementById("palavras-digitadas").innerText = frase.split(" ").length;
 });
 
-var tempoJogo = document.getElementById("tempo");
+
 campo.addEventListener("focus", function() {
-    setInterval(function() {
+    //Impedir que jogo inicie sem o jogador informar o nome
+    if (nome.value.length == 0) {
+        alert("Digite o nome do jogador!");
+        nome.focus();
+        return;
+    }
+    cronometro = setInterval(function() {
         let tempoRestante = tempoJogo.innerHTML;
         if (tempoRestante <= 0) {
             campo.setAttribute("disabled", true);
+            clearInterval(cronometro);
+            let nome = document.getElementById("nome").value;
+            let palavrasDigitadas = document.getElementById("palavras-digitadas").innerText;
+            let pontuacao = palavrasDigitadas/tempoInicial * 60;
+            let tabela = document.getElementById("tabela-resultado");
+            let tr = document.createElement("tr");
+            let td_user = document.createElement("td");
+            let td_score = document.createElement("td");
+            td_user.className = "w3-center";
+            td_score.className = "w3-center";
+
+            td_user.appendChild(document.createTextNode(nome));
+            tr.appendChild(td_user);
+            td_score.appendChild(document.createTextNode(pontuacao));
+            tr.appendChild(td_score);
+            tabela.appendChild(tr);
         } else {
             tempoRestante--;
             tempoJogo.innerHTML = tempoRestante;
         }
     }, 1000);
-}, {once: true});*/
+}, {once: false});
+
+reiniciarBtn.addEventListener("click", function() {
+    clearInterval(cronometro);
+    campo.removeAttribute("disabled");
+    campo.value = "";
+    document.getElementById("nome").value = "";
+    document.getElementById("caracteres-digitados").innerText = "0";
+    document.getElementById("palavras-digitadas").innerText = "0";
+    document.getElementById("tempo").innerText = tempoInicial;
+    nome.focus();
+});
