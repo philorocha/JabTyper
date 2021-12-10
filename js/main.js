@@ -49,31 +49,31 @@ $("#botao-reiniciar").on("click", function() {
     nome.focus();
 })*/
 
-/*
-JS puro*/
+/* JS puro */
 
-const frases = [
-    'Eu acredito que às vezes são as pessoas que ninguém espera nada que fazem as coisas que ninguém consegue imaginar.',
-    'Nós só podemos ver um pouco do futuro, mas o suficiente para perceber que há muito a fazer.',
-    'As máquinas me surpreendem muito frequentemente.',
-    'Os computadores são inúteis. Eles só podem dar respostas.',
-    'Para fazer um procedimento recursivo é preciso ter fé.',
-    'Todos neste país deveriam aprender a programar um computador, pois isto ensina a pensar.',
-    'Para entender recursão, devemos primeiro compreender uma recursão.',
-    'Primeiro resolva o problema. Depois escreva o código',
-    'Eu preciso de uma boa nota em Web 2',
-    'Falar é fácil, me mostre o código.'
-];
+var frase;
+var numPalavras;
+var tamanhoFrase;
 
+function fraseGenerator() {
+    axios.get('https://type.fit/api/quotes')
+        .then((res) => {
+            frase = document.getElementById("frase").innerText = res.data[Math.floor(Math.random() * 1643)].text;
+            numPalavras = frase.split(" ").length;
+            tamanhoFrase = document.getElementById("tamanho-frase").innerText = numPalavras;
+            //console.log(res.data[Math.floor(Math.random() * 1643)].text);
+    });
+}
 
-var frase = document.getElementById("frase").innerText;
-var numPalavras = frase.split(" ").length;
-var tamanhoFrase = document.getElementById("tamanho-frase").innerText = numPalavras;
+window.onload = fraseGenerator();
+
 var campo = document.getElementById("campo-digitacao");
 var tempoJogo = document.getElementById("tempo");
 var tempoInicial = tempoJogo.innerText;
 var reiniciarBtn = document.getElementById("botao-reiniciar");
 var cronometro;
+
+
 
 campo.addEventListener("input", function(event) {
     let textoUser = campo.value;
@@ -97,7 +97,6 @@ campo.addEventListener("focus", function() {
         if (tempoRestante <= 0) {
             campo.setAttribute("disabled", true);
             clearInterval(cronometro);
-            console.log(calculaScore(frase, campo.value));
             let pontuacao = calculaScore(frase, campo.value);
             let nome = document.getElementById("nome").value;
             let palavrasDigitadas = document.getElementById("palavras-digitadas").innerText;
@@ -123,6 +122,7 @@ campo.addEventListener("focus", function() {
 
 reiniciarBtn.addEventListener("click", function() {
     clearInterval(cronometro);
+    fraseGenerator();
     campo.removeAttribute("disabled");
     campo.value = "";
     document.getElementById("nome").value = "";
@@ -140,6 +140,8 @@ function calculaScore(frase, inputUsuario) {
 
     let fraseArray = frase.split(' ');
     let inputUsuarioArray = inputUsuario.split(' ');
+    console.log(fraseArray);
+    console.log(inputUsuarioArray);
 
     for (let i = 0; i < fraseArray.length; i++) {
         if (fraseArray[i] == inputUsuarioArray[i]) {
