@@ -1,56 +1,3 @@
-/*var frase = $(".frase").text();
-var numPalavras = frase.split(" ").length;
-
-var tempoJogo = $("#tempo");
-var tempoInicial = tempoJogo.text();
-var campo = $("#campo-digitacao");
-var nome = $("#nome");
-
-campo.on("input", function() {
-    var frase = campo.val();
-    var nCaracteresDigitados = frase.length;
-    $("#caracteres-digitados").text(nCaracteresDigitados);
-    $("#palavras-digitadas").text(frase.split(" ").length);
-});
-
-var cronometro;
-
-campo.on("focus", function() {
-    //Impedir que jogo inicie sem o jogador informar o nome
-    if (nome.val().length == 0) {
-        alert("Digite o nome do jogador!");
-        $("#nome").focus();
-        return;
-    }
-    cronometro = setInterval(function() {
-        var tempoRestante = tempoJogo.text();
-        if (tempoRestante <= 0) {
-            campo.attr("disabled", true);
-            clearInterval(cronometro);
-            var nome = $("#nome").val();
-            var palavrasDigitadas = $("#palavras-digitadas").text();
-            var pontuacao = palavrasDigitadas/tempoInicial * 60;
-            $("#tabela-resultado").append("<tr><td class='w3-center'>"+nome+"</td><td class='w3-center'>"+pontuacao+"</td></tr>");
-        } else {
-            tempoRestante--;
-            tempoJogo.text(tempoRestante);
-        }
-    }, 1000);
-});
-
-$("#botao-reiniciar").on("click", function() {
-    clearInterval(cronometro);
-    campo.attr("disabled", false);
-    campo.val("");
-    nome.val("");
-    $("#caracteres-digitados").text("0");
-    $("#palavras-digitadas").text("0");
-    $("#tempo").text(tempoInicial)
-    nome.focus();
-})*/
-
-/* JS puro */
-
 var frase;
 var numPalavras;
 var tamanhoFrase;
@@ -61,7 +8,6 @@ function fraseGenerator() {
             frase = document.getElementById("frase").innerText = res.data[Math.floor(Math.random() * 1643)].text;
             numPalavras = frase.split(" ").length;
             tamanhoFrase = document.getElementById("tamanho-frase").innerText = numPalavras;
-            //console.log(res.data[Math.floor(Math.random() * 1643)].text);
     });
 }
 
@@ -92,6 +38,10 @@ campo.addEventListener("focus", function() {
         nome.focus();
         return;
     }
+    //Resolvendo problema da contagem acelerar ao perder e voltar o foco na textarea
+    if (tempoJogo.innerText < 15) {
+        return;
+    }
     cronometro = setInterval(function() {
         let tempoRestante = tempoJogo.innerText;
         if (tempoRestante <= 0) {
@@ -99,8 +49,6 @@ campo.addEventListener("focus", function() {
             clearInterval(cronometro);
             let pontuacao = calculaScore(frase, campo.value);
             let nome = document.getElementById("nome").value;
-            let palavrasDigitadas = document.getElementById("palavras-digitadas").innerText;
-            // let pontuacao = palavrasDigitadas/tempoInicial * 60;
             let tabela = document.getElementById("tabela-resultado");
             let tr = document.createElement("tr");
             let td_user = document.createElement("td");
@@ -140,8 +88,6 @@ function calculaScore(frase, inputUsuario) {
 
     let fraseArray = frase.split(' ');
     let inputUsuarioArray = inputUsuario.split(' ');
-    console.log(fraseArray);
-    console.log(inputUsuarioArray);
 
     for (let i = 0; i < fraseArray.length; i++) {
         if (fraseArray[i] == inputUsuarioArray[i]) {
